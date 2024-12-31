@@ -12,10 +12,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Install clang
+      run: dpkg --list | grep compiler && apt update && apt-get install -y g++ clang && dpkg --list | grep compiler
+      shell: bash
     - name: Install Go
-      uses: actions/setup-go@v2
+      uses: actions/setup-go@v5
       with:
-        go-version: 1.17.2
+        go-version: 'stable'
     - name: Checkout
       uses: actions/checkout@v4
     - name: Go Test
