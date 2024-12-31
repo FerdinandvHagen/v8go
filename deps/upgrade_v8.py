@@ -85,15 +85,25 @@ def get_latest_v8_info():
   with urllib.request.urlopen(CHROME_VERSIONS_URL) as response:
    json_response = response.read()
 
-  return json.loads(json_response)
+  latest_stable_v8_hash = json.loads(json_response)[0]["hashes"]["v8"]
+  
+
+  with urllib.request.urlopen(f"https://chromium.googlesource.com/v8/v8/+/{latest_stable_v8_hash}?format=JSON") as response:
+    json_response = response.read().decode('utf-8').lstrip(")]}'")
+
+  message = json.loads(json_response)["message"]
+  version = message[message.find(' '):message.find('\n')].strip()
+
+  return version
 
 # Current version
 current_v8_version_installed = read_v8_version_file(deps_path)
 
 # Get latest version
-latest_v8_info = get_latest_v8_info()
-
-latest_stable_v8_version = latest_v8_info[0]["version"]
+latest_stable_v8_version = get_latest_v8_info()
+print(f"Current version: {current_v8_version_installed}")
+print(f"Latest version: {latest_stable_v8_version}")
+print("")
 
 if current_v8_version_installed != latest_stable_v8_version:
   subprocess.check_call(["git", "fetch", "origin", latest_stable_v8_version],
