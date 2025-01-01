@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
   push:
     branches: ['v8_*_upgrade']
-    paths: ['deps/VERSION']
 
 jobs:
     build:
@@ -46,7 +45,7 @@ jobs:
                 target-arch: ${{ matrix.arch }}
 
             - name: Upload Artifact
-              uses: actions/upload-artifact@v2
+              uses: actions/upload-artifact@v4
               with:
                 name: ${{ env.ARCHIVE_NAME }}
                 path: deps/v8/out/release/obj/libv8_monolith.a
