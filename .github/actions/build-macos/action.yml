@@ -54,6 +54,7 @@ runs:
       run: ccache -s
 
     - name: Test V8
+      if: ${{ inputs.target-arch == 'arm64' }}
       shell: bash
       working-directory: ./deps
       run: ./v8_test.sh

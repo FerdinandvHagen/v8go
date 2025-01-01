@@ -43,6 +43,14 @@ runs:
       working-directory: ./deps
       run: ./v8_download.sh
 
+    - name: Prepare for arm64 cross compile
+      shell: bash
+      if: ${{ inputs.target-arch == 'arm64' }}
+      working-directory: ./deps/v8
+      run: |
+        sudo apt-get install -yq g++-aarch64-linux-gnu
+        build/linux/sysroot_scripts/install-sysroot.py --arch=arm64
+
     - name: Compile V8
       shell: bash
       working-directory: ./deps
@@ -55,5 +63,6 @@ runs:
 
     - name: Test V8
       shell: bash
+      if: ${{ inputs.target-arch == 'x64' }}
       working-directory: ./deps
       run: ./v8_test.sh

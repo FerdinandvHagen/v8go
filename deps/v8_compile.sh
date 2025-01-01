@@ -22,7 +22,6 @@ PATH="${depot_tools_dir}:$PATH"
 export PATH
 
 os=""
-
 case "$(uname -s)" in
   Linux)
     os="linux"
