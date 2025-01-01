@@ -26,13 +26,13 @@ jobs:
                   fetch-depth: 1
 
             - name: Build Release for Linux
-              if: startsWith(matrix.os, 'ubuntu')
+              if: startsWith(matrix.platform, 'ubuntu')
               uses: ./.github/actions/build-linux
               with:
                 target-arch: ${{ matrix.arch }}
 
-            - name: Build Release for macOS (${{ runner.arch }})
-              if: startsWith(matrix.os, 'macos')
+            - name: Build Release for macOS
+              if: startsWith(matrix.platform, 'macos')
               uses: ./.github/actions/build-macos
               with:
                 target-arch: ${{ matrix.arch }}
