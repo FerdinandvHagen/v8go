@@ -24,6 +24,11 @@ jobs:
                   submodules: true
                   clean: true
                   fetch-depth: 1
+
+            - name: Update depot_tools fetch config
+              run: cd deps/depot_tools && git config --unset-all remote.origin.fetch; git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
+              shell: bash
+
             - name: Build Release for Linux
               if: startsWith(matrix.os, 'ubuntu')
               uses: ./.github/actions/build-linux
