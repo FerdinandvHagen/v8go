@@ -31,9 +31,7 @@ jobs:
 
             - name: Set v8 build name
               working-directory: ./deps
-              run: ./v8_name.sh
-              with:
-                target-arch: ${{ matrix.arch }}
+              run: ./v8_name.sh ${{ matrix.arch }}
 
             - name: Build Release for Linux
               if: startsWith(matrix.platform, 'ubuntu')
