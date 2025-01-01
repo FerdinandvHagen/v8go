@@ -2,7 +2,7 @@
 
 set -e
 
-target_cpu="$$1"
+target_cpu="$1"
 
 dir="$(cd "$(dirname "$0")" && pwd)"
 v8_dir="${dir}/v8"
@@ -21,21 +21,19 @@ fi
 PATH="${depot_tools_dir}:$PATH"
 export PATH
 
-os="$RUNNER_OS"
+os=""
 
-if [ -z "$os" ]; then
-  case "$(uname -s)" in
-    Linux)
-      os="linux"
-      ;;
-    Darwin)
-      os="darwin"
-      ;;
-    *)
-      echo "Unknown OS type"
-      exit 1
-  esac
-fi
+case "$(uname -s)" in
+  Linux)
+    os="linux"
+    ;;
+  Darwin)
+    os="darwin"
+    ;;
+  *)
+    echo "Unknown OS type"
+    exit 1
+esac
 
 cores="2"
 
