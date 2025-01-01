@@ -55,35 +55,35 @@ jobs:
                 retention-days: 1
 
     release:
-    runs-on: ubuntu-latest
-    permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository.
-      contents: write
-    needs: build
-    steps:
-      - name: Download Archives
-        uses: actions/download-artifact@v4
-        with:
-          path: artifact
+      runs-on: ubuntu-latest
+      permissions:
+        # Give the default GITHUB_TOKEN write permission to commit and push the
+        # added or changed files to the repository.
+        contents: write
+      needs: build
+      steps:
+        - name: Download Archives
+          uses: actions/download-artifact@v4
+          with:
+            path: artifact
 
-      - name: Display Downloads
-        run: ls -lhR artifact
+        - name: Display Downloads
+          run: ls -lhR artifact
 
-      - name: Copy Artifacts to correct folders
-        shell: bash
-        run: |
-          rm deps/darwin_x86_64/libv8.a
-          rm deps/darwin_arm64/libv8.a
-          rm deps/linux_x86_64/libv8.a
-          rm deps/linux_arm64/libv8.a
+        - name: Copy Artifacts to correct folders
+          shell: bash
+          run: |
+            rm deps/darwin_x86_64/libv8.a
+            rm deps/darwin_arm64/libv8.a
+            rm deps/linux_x86_64/libv8.a
+            rm deps/linux_arm64/libv8.a
 
-          cp artifact/v8_darwin_x64.a deps/darwin_x86_64/libv8.a
-          cp artifact/v8_darwin_arm64.a deps/darwin_arm64/libv8.a
-          cp artifact/v8_linux_x64.a deps/linux_x86_64/libv8.a
-          cp artifact/v8_linux_arm64.a deps/linux_arm64/libv8.a
+            cp artifact/v8_darwin_x64.a deps/darwin_x86_64/libv8.a
+            cp artifact/v8_darwin_arm64.a deps/darwin_arm64/libv8.a
+            cp artifact/v8_linux_x64.a deps/linux_x86_64/libv8.a
+            cp artifact/v8_linux_arm64.a deps/linux_arm64/libv8.a
 
-      - name: Commit and Push
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Update V8 static libraries"
+        - name: Commit and Push
+          uses: stefanzweifel/git-auto-commit-action@v5
+          with:
+            commit_message: "Update V8 static libraries"
