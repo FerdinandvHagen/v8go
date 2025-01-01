@@ -100,7 +100,7 @@ def get_latest_v8_info():
 current_v8_version_installed = read_v8_version_file(deps_path)
 
 # Get latest version
-latest_stable_v8_version = "11.9.169.7" # get_latest_v8_info()
+latest_stable_v8_version = get_latest_v8_info()
 print(f"Current version: {current_v8_version_installed}")
 print(f"Latest version: {latest_stable_v8_version}")
 print("")
