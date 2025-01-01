@@ -1,0 +1,34 @@
+name: V8 Upgrade
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * *' # Run every day
+
+jobs:
+    upgrade:
+        name: Upgrade V8
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  submodules: true
+                  fetch-depth: 0
+
+            - uses: actions/setup-python@v5
+              with:
+                python-version: '3.8'
+
+            - name: Run upgrade script
+              working-directory: ./deps
+              run: ./v8_upgrade.sh
+
+            - name: Create PR
+              uses: peter-evans/create-pull-request@v3
+              with:
+                branch: "v8_${{ env.NEW_V8_VERSION }}_upgrade"
+                commit-message: "Upgrade V8 binaries for ${{ env.NEW_V8_VERSION }} version"
+                title: "Upgrade V8 binaries for ${{ env.NEW_V8_VERSION }} version"
+                body: "Auto-generated pull request to upgrade V8 binary for ${{ env.NEW_V8_VERSION }} version"
+                delete-branch: true
