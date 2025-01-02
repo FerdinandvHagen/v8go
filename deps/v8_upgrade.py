@@ -86,4 +86,4 @@ def read_v8_version_file(src_path):
 shutil.rmtree(deps_include_path)
 shutil.copytree(v8_include_path, deps_include_path, dirs_exist_ok=True)
 create_vendor_files(deps_include_path)
-update_v8_version_file(deps_path, latest_stable_v8_version)
+update_v8_version_file(deps_path, v8_version)
