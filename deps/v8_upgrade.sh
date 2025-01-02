@@ -14,7 +14,9 @@ if [ -n "$latest_v8_version" ] && [ x"$latest_v8_version" != x"$current_v8_versi
     echo "Upgrading V8 $current_v8_version --> $latest_v8_version"
     echo -n "$latest_v8_version" > VERSION
     echo "NEW_V8_VERSION=$latest_v8_version" >> $GITHUB_ENV
+    echo "NEW_V8_VERSION=$latest_v8_version" >> $GITHUB_OUTPUT
 else
     echo "V8 is up to date on version $current_v8_version"
     echo "NEW_V8_VERSION=0" >> $GITHUB_ENV
+    echo "NEW_V8_VERSION=0" >> $GITHUB_OUTPUT
 fi
