@@ -45,6 +45,10 @@ jobs:
           clean: true
           fetch-depth: 1
 
+      - name: Update version file
+        shell: bash
+        run: echo -n "${{ needs.upgrade.outputs.v8_version }}" > deps/VERSION
+
       - name: Build Release for Linux
         if: startsWith(matrix.platform, 'ubuntu')
         uses: ./.github/actions/build-linux
