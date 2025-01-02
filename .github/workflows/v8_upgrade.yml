@@ -115,7 +115,7 @@ jobs:
 
       - name: Ensure includes and files are up to date
         shell: bash
-        run: ./deps/v8_update.py ${{ needs.upgrade.outputs.v8_version }}
+        run: ./deps/v8_upgrade.py ${{ needs.upgrade.outputs.v8_version }}
 
       - name: Create PR
         uses: peter-evans/create-pull-request@v3
