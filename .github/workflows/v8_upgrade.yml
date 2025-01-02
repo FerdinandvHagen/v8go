@@ -8,7 +8,7 @@ on:
 jobs:
   upgrade:
     name: Upgrade V8
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     outputs:
       v8_version: ${{ steps.check_version.outputs.NEW_V8_VERSION }}
     steps:
@@ -67,7 +67,7 @@ jobs:
         run: |
           target_arch="$1"
           os=$(echo "$(uname -s)" | tr '[:upper:]' '[:lower:]')
-          archive_name="v8_${os}_${target_arch}"
+          archive_name="v8_${os}_${{ matrix.arch }}"
           echo "Using Archive Name: $archive_name"
           echo "ARCHIVE_NAME=$archive_name" >> "$GITHUB_ENV"
 
@@ -80,7 +80,7 @@ jobs:
   
   release:
     name: Release V8
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
       - upgrade
       - build
