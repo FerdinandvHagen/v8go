@@ -84,7 +84,7 @@ jobs:
     needs:
       - upgrade
       - build
-    if: needs.build.outputs.v8_version != '0'
+    if: needs.upgrade.outputs.v8_version != '0'
     permissions:
       contents: write
     steps:
