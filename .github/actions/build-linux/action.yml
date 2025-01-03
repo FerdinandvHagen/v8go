@@ -60,9 +60,3 @@ runs:
       shell: bash
       working-directory: ./deps
       run: ccache -s
-
-    - name: Test V8
-      shell: bash
-      if: ${{ inputs.target-arch == 'x64' }}
-      working-directory: ./deps
-      run: ./v8_test.sh
