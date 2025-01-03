@@ -399,7 +399,8 @@ void CPUProfileDelete(CPUProfile* profile) {
   Local<Template> tmpl = tmpl_ptr->ptr.Get(iso);
 
 void TemplateFreeWrapper(TemplatePtr tmpl) {
-  tmpl->ptr.IsEmpty();  // Just does `val_ = 0;` without calling V8::DisposeGlobal
+  tmpl->ptr
+      .IsEmpty();  // Just does `val_ = 0;` without calling V8::DisposeGlobal
   delete tmpl;
 }
 

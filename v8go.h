@@ -16,13 +16,13 @@ typedef v8::CpuProfile* CpuProfilePtr;
 typedef const v8::CpuProfileNode* CpuProfileNodePtr;
 typedef v8::ScriptCompiler::CachedData* ScriptCompilerCachedDataPtr;
 
-template<typename T> struct CopyablePersistentTraits {
+template <typename T>
+struct CopyablePersistentTraits {
   typedef v8::Persistent<T, CopyablePersistentTraits<T> > CopyablePersistent;
   static const bool kResetInDestructor = true;
   template <typename S, typename M>
-  static inline void Copy(const v8::Persistent<S, M> &source,
-      CopyablePersistent *dest) {
-  }
+  static inline void Copy(const v8::Persistent<S, M>& source,
+                          CopyablePersistent* dest) {}
 };
 
 extern "C" {
