@@ -115,12 +115,19 @@ jobs:
 
           cp artifact/v8_linux_x64/libv8_monolith.a deps/linux_x86_64/libv8.a
 
+          rm -rf artifact
+
+      - name: Download V8 Source
+        shell: bash
+        working-directory: ./deps
+        run: ./v8_download.sh
+
       - name: Ensure includes and files are up to date
         shell: bash
         run: ./deps/v8_upgrade.py ${{ needs.upgrade.outputs.v8_version }}
 
       - name: Create PR
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v7
         with:
           commit-message: "Upgrade V8 binaries for ${{ needs.upgrade.outputs.v8_version }} version"
           branch: "v8_${{ needs.upgrade.outputs.v8_version }}_upgrade"
