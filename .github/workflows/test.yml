@@ -26,7 +26,7 @@ jobs:
     - name: Go Test
       env:
         CGO_CXXFLAGS: "-Werror"
-      run: go test -v -coverprofile c.out ./...
+      run: go test -v -coverprofile c.out $(go list ./... | grep -v v8/third_party)
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       env:

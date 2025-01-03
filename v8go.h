@@ -294,7 +294,7 @@ extern int ObjectSetInternalField(ValuePtr ptr, int idx, ValuePtr val_ptr);
 extern int ObjectInternalFieldCount(ValuePtr ptr);
 extern RtnValue ObjectGet(ValuePtr ptr, const char* key);
 extern RtnValue ObjectGetIdx(ValuePtr ptr, uint32_t idx);
-// extern ValuePtr ObjectGetInternalField(ValuePtr ptr, int idx);
+extern ValuePtr ObjectGetInternalField(ValuePtr ptr, int idx);
 int ObjectHas(ValuePtr ptr, const char* key);
 int ObjectHasIdx(ValuePtr ptr, uint32_t idx);
 int ObjectDelete(ValuePtr ptr, const char* key);
