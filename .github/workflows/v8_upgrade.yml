@@ -117,6 +117,10 @@ jobs:
 
           rm -rf artifact
 
+      - name: Update version file
+        shell: bash
+        run: echo -n "${{ needs.upgrade.outputs.v8_version }}" > deps/VERSION
+
       - name: Download V8 Source
         shell: bash
         working-directory: ./deps
